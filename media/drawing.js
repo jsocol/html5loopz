@@ -22,18 +22,21 @@ var wave = (function() {
     return samples;
 })();
 
-function SampleCanvas(sample) {
-    var $canvas = $('<canvas height="50" width="250">'),
-        ctx = $canvas[0].getContext('2d'),
-        HEIGHT = 50, WIDTH = 250;
-
+function drawSample(canvas, sample) {
+    var $canvas = $(canvas),
+        ctx = canvas.getContext('2d'),
+        HEIGHT = $canvas.height(), WIDTH = $canvas.width();
+    canvas.height = HEIGHT;
+    canvas.width = WIDTH;
+    
+    ctx.strokeStyle = 'rgba(255,255,255,.8)';
     ctx.beginPath();
     ctx.translate(0, HEIGHT/2);
     for (var i=1; i<=WIDTH; i++) {
         var j = ~~(i / WIDTH * 44100),
             A = ~~((HEIGHT/2) * Math.abs(sample[j]));
         ctx.moveTo(i, A);
-        ctx.lineTo(i, -A);
+        ctx.lineTo(i+.5, -A);
     }
     ctx.stroke();
     return $canvas[0];

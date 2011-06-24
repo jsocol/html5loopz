@@ -11,14 +11,33 @@
       <button id="stop">Stop</button>
     </header>
     <section id="lib">
+      <ul>
+      </ul>
     </section>
     <section id="timeline">
       <div id="ruler">
       </div>
       <div class="track">
       </div>
-      <div class="track">
-      </div>
     </section>
+    <script src="media/jquery.min.js"></script>
+    <script src="media/jquery-ui-1.8.13.custom.min.js"></script>
+    <script src="media/drawing.js"></script>
+    <script src="media/samples.js"></script>
+    <script src="media/timeline.js"></script>
+    <script src="media/library.js"></script>
+    <script>
+      for (var i=0; i<Timeline.channels.length; i++) {
+          $('#timeline').append('<div class="track"></div>');
+      }
+      var $liblist = $("#lib ul"),
+          $nc;
+      for (var i=0; i<Library.length; i++) {
+        $nc = $('<canvas data-clipid="'+i+'"></canvas>');
+        $liblist.append($nc);
+        drawSample($nc[0], Library[i].sample);
+      }
+      $liblist.
+    </script>
   </body>
 </html>

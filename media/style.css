@@ -1,7 +1,10 @@
-html, body {
-    height: 100%;
+* {
     margin: 0;
     padding: 0;
+    list-style-type: none;
+}
+html, body {
+    height: 100%;
 }
 header {
     width: 100%;
@@ -13,14 +16,21 @@ header {
     z-index: 2;
 }
 #lib {
-    height: 100%;
+    height: -moz-calc(100% - 64px);
     position: fixed;
     width: 200px;
     border-right: 1px solid black;
-    top: 0;
+    top: 64px;
     left: 0;
     z-index: 1;
     background: #eef;
+    position: relative;
+}
+#lib canvas {
+    margin: 4px;
+    width: 192px;
+    height: 50px;
+    background: #000;
 }
 #timeline {
     position: absolute;
