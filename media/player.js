@@ -2,13 +2,12 @@ var Player = (function(RATE) {
     var output = new Audio();
     output.mozSetup(1, RATE);
 
-    function Silence(beats, tempo) {
-        var l = ~~(beats * (1/tempo) * 60) * 44100;
-        return new Float32Array(l);
+    function Silence(length) {
+        return new Float32Array(length);
     }
 
     return {
-        play: function(timeline, tempo) {
+        play: function(timeline) {
             var CHANNELS = timeline.channels.length,
                 audio = [],
                 compiled = new Float32Array();
@@ -22,11 +21,11 @@ var Player = (function(RATE) {
                     var sample = channel.samples[i],
                         clip = Library[sample.sample];
                     if (cursor < sample.time) {
-                        data.push.apply(data, Silence(sample.time - cursor, tempo));
+                        data.push.apply(data, Silence(sample.time - cursor));
                         cursor += sample.time;
                     }
                     data.push.apply(data, clip.sample);
-                    cursor += clip.length;
+                    cursor += clip.sample.length;
                 }
                 audio.push(data);
             }
