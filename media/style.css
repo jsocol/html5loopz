@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 64px;
+    background: #666;
+    z-index: 2;
+}
+#lib {
+    height: 100%;
+    position: fixed;
+    width: 200px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: #eef;
+}
+#timeline {
+    padding-top: 64px;
+    margin-left: 200px;
+    background: #ccc;
+    height: 200px;
+}
