@@ -16,14 +16,41 @@ header {
     height: 100%;
     position: fixed;
     width: 200px;
+    border-right: 1px solid black;
     top: 0;
     left: 0;
     z-index: 1;
     background: #eef;
 }
 #timeline {
-    padding-top: 64px;
-    margin-left: 200px;
+    position: absolute;
+    top: 64px;
+    left: 200px;
+    height: -moz-calc(100% - 64px);
+    width: -moz-calc(100% - 200px);
     background: #ccc;
-    height: 200px;
+    overflow: auto;
+}
+#ruler {
+    height: 16px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #444;
+    background: #ddd;
+}
+#timeline .track {
+    height: 50px;
+    margin: 10px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #444;
+    background: #ddd;
+}
+#timeline .track .clip {
+    height: 50px;
+}
+header button {
+    width: 48px;
+    height: 48px;
+    margin: 8px;
+    border-radius: 24px;
+    line-height: 48px;
 }
