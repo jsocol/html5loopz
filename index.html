@@ -39,8 +39,6 @@
         drawSample($nc[0], Library[i].sample);
       }
 
-      // Uncomment to play something annoying on load.
-      /*
       var [c0, c1, c2, c3] = Timeline.channels,
           r = 44100;
       c0.addSample(0, 0);
@@ -56,6 +54,8 @@
       c3.addSample(1, 0.25 * r);
       c3.addSample(1, 1.25 * r);
 
+      // Uncomment to play something annoying on load.
+      /*
       Player.play(Timeline);
       */
     </script>
