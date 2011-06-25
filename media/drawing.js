@@ -28,12 +28,12 @@ function drawSample(canvas, sample) {
         HEIGHT = $canvas.height(), WIDTH = $canvas.width();
     canvas.height = HEIGHT;
     canvas.width = WIDTH;
-    
+
     ctx.strokeStyle = 'rgba(255,255,255,.8)';
     ctx.beginPath();
     ctx.translate(0, HEIGHT/2);
     for (var i=1; i<=WIDTH; i++) {
-        var j = ~~(i / WIDTH * 44100),
+        var j = ~~(i / WIDTH * sample.length),
             A = ~~((HEIGHT/2) * Math.abs(sample[j]));
         ctx.moveTo(i, A);
         ctx.lineTo(i+.5, -A);
