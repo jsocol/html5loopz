@@ -18,8 +18,6 @@
     <section id="timeline">
       <div id="ruler">
       </div>
-      <div class="track">
-      </div>
     </section>
     <script src="media/jquery.min.js"></script>
     <script src="media/jquery-ui-1.8.13.custom.min.js"></script>
@@ -29,7 +27,7 @@
     <script src="media/player.js"></script>
     <script>
       for (var i=0; i<Timeline.channels.length; i++) {
-          $('#timeline').append('<div class="track"></div>');
+          $('#timeline').append('<div class="track" data-channel="'+i+'"></div>');
       }
       var $liblist = $("#lib ul"),
           $nc;
@@ -47,17 +45,31 @@
               clonedSample;
           var pxOffset = ui.offset.left - $track.offset().left + 4,
               sampleOffset = ~~(pxOffset / 64) * 4 * 44100,
-              snapOffset = ~~(pxOffset / 64) * 64;
+              snapOffset = ~~(pxOffset / 64) * 64,
+              clip = ui.draggable.data('clipid');
           clonedSample = $('<canvas class="clip"></canvas>');
           $track.append(clonedSample);
           clonedSample.css({
             'position': 'absolute',
             'left': snapOffset + 'px',
-            'width': ~~(Library[ui.draggable.attr('data-clipid')].sample.length / 44100 * 256)
+            'width': ~~(Library[clip].sample.length / 44100 * 256)
           });
-          drawSample(clonedSample[0], Library[ui.draggable.attr('data-clipid')].sample);
+          drawSample(clonedSample[0], Library[clip].sample);
+          // TODO: Dragging needs to call Timeline.channel[x].moveSample.
+          // TODO: Deleting? (call removeSample())
           clonedSample.draggable({ scope: 'timelineClip', axis: 'x', containment: '.track', grid: [64, 20]});
+          // This isn't quite right. I think the resolution is too coarse.
+          Timeline.channels[$track.data('channel')].addSample(clip, sampleOffset);
         }
+      });
+
+      $(document).ready(function() {
+        $('#play').click(function() {
+          Player.play(Timeline);
+        });
+        $('#stop').click(function() {
+          Player.pause();
+        });
       });
 
       // var [c0, c1, c2, c3] = Timeline.channels,
